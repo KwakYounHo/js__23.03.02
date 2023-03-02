@@ -5,38 +5,42 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Practice</title>
+  <link rel="stylesheet" href="./turn_dynamic.css">
 </head>
 <body>
   <script>
     const YH = {
-      createElement(tagName, target, attri, attriValue) {
+      createElement : function(tagName, target, attri, attriValue) {
         const element = document.createElement(tagName);
         target.appendChild(element);
         if (attri !== undefined) {
           element.setAttribute(attri,attriValue);
         }
       }
-
+    
     }
-
+    
     /*--------- to body wrap요소 2개 ------------*/
+    const N_body = document.body
     YH.createElement('aside',document.body,'id','move-btn');
     YH.createElement('div', document.body,'id','root');
     // --------------------------------------------
-
-
+    
+    
     /*-------------- aside#move-btn ---------------*/
     const aside = document.getElementById('move-btn');
     YH.createElement('h1',aside)
     aside.children[0].innerText = 'move!'
     // ---------------------------------------------
-
-
+    
+    
     /*--------------- div#root -------------------*/
     const root = document.getElementById('root');
-    YH.createElement('main', root)
-
     
+    // root 하위 요소 'main' 추가
+    YH.createElement('main', root)
+    
+    // main 하위 요소 섹션 2개 추가
     for (i=0; i<2; i++) {
       const main = document.querySelector('#root > main')
       YH.createElement('section',main)
@@ -46,26 +50,31 @@
         main.children[i].id = 'right-sect'
       }
     }
-
-    /*------------ 형제 관계의 태그에 공통 자식 요소 추가 -----------------*/
+    
+    /*-------------- 각 섹션에 'ul' 자식 추가 -----------------*/
+    
+    // 형제 관계의 태그에 공통 자식 요소 추가
     const sectionWrap = [document.getElementById('left-sect'), document.getElementById('right-sect')];
-
+    
     for (i=0; i<2; i++) {
       YH.createElement('ul', sectionWrap[i])
     }
-    // -------------------------------------------------------------------
-
-
-
+    // ---------------------------------------------------------
+    
+    
+    
     /*----------- 위 배열로 형제 관계의 Section에 동시에 공통 자식 ul 삽입 --------*/
     const leftSect = document.getElementById('left-sect')
     // YH.createElement('ul', leftSect)
     // ----------------------------------------------------------------------------
-
+    
+    
+    /*---------- 왼쪽 섹션 'ul'에 'li' 5개 추가하고, 내용 바꾸기----------*/
     for (i=0; i<5; i++) {
       YH.createElement('li', leftSect.children[0])
       leftSect.children[0].children[i].innerText = `items-${i+1}`
     }
+    // -------------------------------------------------------------------
   </script>
 </body>
 </html>

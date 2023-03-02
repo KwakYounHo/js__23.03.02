@@ -16,8 +16,8 @@
         if (attri !== undefined) {
           element.setAttribute(attri,attriValue);
         }
-      }
-    
+      },
+      selectedItem : [],
     }
     
     /*--------- to body wrap요소 2개 ------------*/
@@ -31,6 +31,13 @@
     const aside = document.getElementById('move-btn');
     YH.createElement('h1',aside)
     aside.children[0].innerText = 'move!'
+    aside.children[0].addEventListener('click', moveClick)
+
+    function moveClick() {
+      for (i=0; i<YH.selectedItem.length; i++) {
+        document.querySelector('#right-sect > ul').appendChild(YH.selectedItem[i])
+      }
+    }
     // ---------------------------------------------
     
     
@@ -41,8 +48,8 @@
     YH.createElement('main', root)
     
     // main 하위 요소 섹션 2개 추가
+    const main = document.querySelector('#root > main')
     for (i=0; i<2; i++) {
-      const main = document.querySelector('#root > main')
       YH.createElement('section',main)
       if (i===0) {
         main.children[i].id = 'left-sect'
@@ -50,7 +57,6 @@
         main.children[i].id = 'right-sect'
       }
     }
-    
     /*-------------- 각 섹션에 'ul' 자식 추가 -----------------*/
     
     // 형제 관계의 태그에 공통 자식 요소 추가
@@ -61,6 +67,7 @@
     }
     // ---------------------------------------------------------
     
+
     
     
     /*----------- 위 배열로 형제 관계의 Section에 동시에 공통 자식 ul 삽입 --------*/
@@ -69,10 +76,19 @@
     // ----------------------------------------------------------------------------
     
     
-    /*---------- 왼쪽 섹션 'ul'에 'li' 5개 추가하고, 내용 바꾸기----------*/
+    /*---- 왼쪽 섹션 'ul'에 'li' 5개 추가하고, 내용 바꾸고 이벤트 추가 ----*/
     for (i=0; i<5; i++) {
       YH.createElement('li', leftSect.children[0])
       leftSect.children[0].children[i].innerText = `items-${i+1}`
+      leftSect.children[0].children[i].addEventListener('click', choose);
+    }
+    
+
+    // test ---------------------------------------------------------------
+    function choose() {
+        YH.selectedItem.push(this)
+        this.style.cssText = 'border: 5px solid black;'
+        console.log(this)
     }
     // -------------------------------------------------------------------
   </script>

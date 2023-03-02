@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root">
+    <ul id="menu">
+      <li>items_1</li>
+      <li>items_2</li>
+      <li>items_3</li>
+      <li>items_4</li>
+      <li>items_5</li>
+    </ul>
+  </div>
+  <script>
+    const menu = document.getElementById("menu");
+    const firstLi = document.querySelector("#menu > li:nth-child(1)")
+    console.dir(firstLi);
+    console.dir(menu.children[0]);
+    
+
+    /*------패턴을 볼 수 있는 환경 구축-------*/
+    // menu.children[0].style.color = "pink";
+    // menu.children[1].style.color = "pink";
+    // menu.children[2].style.color = "pink";
+    // menu.children[3].style.color = "pink";
+    // menu.children[4].style.color = "pink";
+    // ----------------------------------------
+
+
+
+    /*---------------같은 반복문---------------*/
+    // for (i=menu.children.length; i>0; i--) {}
+
+    
+    let switchValue = true;
+    for (i=0; i<menu.children.length; i++) {
+      menu.children[i].style.color = "pink";
+      menu.addEventListener('click', function() {
+      if(switchValue === true) {
+        for(let i = 0; i< menu.children.length; i++) {
+          menu.children[i].style.color = "pink";
+        }
+        menu.style.backgroundColor = "black"
+        switchValue = false;
+      } else {
+        for(let i = 0; i< menu.children.length; i++) {
+          menu.children[i].style.color = "cadetblue";
+        }
+        menu.style.backgroundColor = "white"
+        switchValue = true;
+      }
+    });
+    }
+    // -----------------------------------------
+
+    // menu.children[0].addEventListener("click", function() {
+    //   this.style.color = "cadetblue";
+    // });
+    // menu.children[1].addEventListener("click", function() {
+    //   this.style.color = "cadetblue";
+    // });
+    // menu.children[2].addEventListener("click", function() {
+    //   this.style.color = "cadetblue";
+    // });
+    // menu.children[3].addEventListener("click", function() {
+    //   this.style.color = "cadetblue";
+    // });
+    // menu.children[4].addEventListener("click", function() {
+    //   this.style.color = "cadetblue";
+    // });
+
+  </script>
+</body>
+</html>
